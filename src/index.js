@@ -17,13 +17,21 @@ let name = searchQuery.value;
 loadBtn.style.display = 'none';
 closeBtn.style.display = 'none';
 
-function eventHandler(e) {
+function onSearch(e) {
 	e.preventDefault();
 	gallery.innerHTML = '';
 	loadBtn.style.display = 'none';
- 
+
 	page = 1;
 	name = searchQuery.value;
+
+if (name === '') {
+	Notiflix.Notify.failure(
+      'Please specify your search query.',
+    );
+    return;
+};
+
 
 fetchImages(name, page, perPage)
 .then(name => {
@@ -32,7 +40,7 @@ fetchImages(name, page, perPage)
   if (name.hits.length > 0) {
 	 Notiflix.Notify.success(`Hooray! We found ${name.totalHits} images.`);
 	 renderGallery(name);
-	 new SimpleLightbox('.gallery a');
+	 new SimpleLightbox('.gallery a').refresh();
 	 closeBtn.style.display = 'block';
 	 closeBtn.addEventListener('click', () => {
 		gallery.innerHTML = '';
@@ -57,7 +65,7 @@ fetchImages(name, page, perPage)
 .catch(error => console.log(error));
 }
 
-searchForm.addEventListener('submit', eventHandler);
+searchForm.addEventListener('submit', onSearch);
 
 
 function renderGallery(name) {
@@ -74,25 +82,25 @@ function renderGallery(name) {
 			<div class="info">
 			  <div class="info__box">
 				 <p class="info-item">
-					<b class="material-symbols-outlined">thumb_up</b>
+					<b class="material-symbols-outlined">Likes</b>
 				 </p>
 				 <p class="info-counter">${hit.likes.toLocaleString()}</p>
 			  </div>
 			  <div class="info__box">
 				 <p class="info-item">
-					<b class="material-symbols-outlined">visibility</b>
+					<b class="material-symbols-outlined">Views</b>
 				 </p>
 				 <p class="info-counter">${hit.views.toLocaleString()}</p>
 			  </div>
 			  <div class="info__box">
 				 <p class="info-item">
-					<b class="material-symbols-outlined">forum</b>
+					<b class="material-symbols-outlined">Comments</b>
 				 </p>
 				 <p class="info-counter">${hit.comments.toLocaleString()}</p>
 			  </div>
 			  <div class="info__box">
 				 <p class="info-item">
-					<b class="material-symbols-outlined">download</b>
+					<b class="material-symbols-outlined">Downloads</b>
 				 </p>
 				 <p class="info-counter">${hit.downloads.toLocaleString()}</p>
 			  </div>
@@ -101,6 +109,15 @@ function renderGallery(name) {
 	  })
 	  .join('');
 	gallery.insertAdjacentHTML('beforeend', markup);
+
+	const { height: cardHeight } = document
+    .querySelector('.gallery')
+    .firstElementChild.getBoundingClientRect();
+
+  window.scrollBy({
+    top: cardHeight * 2,
+    behavior: 'smooth',
+  });
  };
  
  loadBtn.addEventListener(
@@ -111,7 +128,7 @@ function renderGallery(name) {
 	  fetchImages(name, page, perPage).then(name => {
 		 let totalPages = name.totalHits / perPage;
 		 renderGallery(name);
-		 new SimpleLightbox('.gallery a');
+		 new SimpleLightbox('.gallery a').refresh();
 		 if (page >= totalPages) {
 			loadBtn.style.display = 'none';
 			Notiflix.Notify.info(

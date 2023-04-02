@@ -1,0 +1,39 @@
+.gallery {
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	margin: 100px auto 0;
+};
+.photo-card{
+	display: block;
+	margin: 10px auto;
+	flex-basis: calc(100% / 5 - 20px);
+	justify-content: center;
+	border-width: 1px;
+	border-color: gray;
+	border-radius: 20px;
+	text-decoration: none;
+
+	& .gallery__image{
+   display: flex;
+	justify-content: center;
+	width: 100%;
+	height: 200px;
+	}
+}
+
+
+
+
+.info {
+	display: flex;
+	gap: 5px;
+	justify-content: space-around;
+	color: #444;
+	&__box {
+	  max-width: 50px;
+	  text-align: center;
+	  line-height: 0.2em;
+	  font-size: 0.7em;
+	}
+ }
