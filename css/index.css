@@ -47,6 +47,55 @@
 .info__box {
   max-width: 50px;
   text-align: center;
-  line-height: 0.2em;
+  line-height: 1.4;
   font-size: 0.7em;
+}
+
+.search-form {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  border-color: grey;
+  border: none;
+  background-color: green;
+}
+
+.search-form button {
+  width: 100px;
+  height: 40px;
+  font-size: 14px;
+  background-color: grey;
+  border-radius: 5px;
+  border: none;
+  margin-left: 5px;
+}
+
+.search-form button:hover {
+  background-color: gold;
+}
+
+.btn-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  gap: 40px;
+}
+
+.load-more,
+.close-btn {
+  width: 100px;
+  height: 40px;
+  font-size: 14px;
+  background-color: grey;
+  border-radius: 5px;
+  border: none;
 }/*# sourceMappingURL=index.css.map */

@@ -17,11 +17,12 @@ let name = searchQuery.value;
 loadBtn.style.display = 'none';
 closeBtn.style.display = 'none';
 
+
 function onSearch(e) {
 	e.preventDefault();
 	gallery.innerHTML = '';
 	loadBtn.style.display = 'none';
-
+   closeBtn.style.display = 'none';
 	page = 1;
 	name = searchQuery.value;
 
@@ -47,9 +48,10 @@ fetchImages(name, page, perPage)
 		closeBtn.style.display = 'none';
 	 });
 
-	 if (page < totalPages) {
+	if (page < totalPages) {
 		loadBtn.style.display = 'block';
-	 } else {
+	 } 
+	 else {
 		loadBtn.style.display = 'none';
 		Notiflix.Notify.info(
 		  "We're sorry, but you've reached the end of search results."
@@ -82,25 +84,25 @@ function renderGallery(name) {
 			<div class="info">
 			  <div class="info__box">
 				 <p class="info-item">
-					<b class="material-symbols-outlined">Likes</b>
+					<b>Likes</b>
 				 </p>
 				 <p class="info-counter">${hit.likes.toLocaleString()}</p>
 			  </div>
 			  <div class="info__box">
 				 <p class="info-item">
-					<b class="material-symbols-outlined">Views</b>
+					<b>Views</b>
 				 </p>
 				 <p class="info-counter">${hit.views.toLocaleString()}</p>
 			  </div>
 			  <div class="info__box">
 				 <p class="info-item">
-					<b class="material-symbols-outlined">Comments</b>
+					<b>Comments</b>
 				 </p>
 				 <p class="info-counter">${hit.comments.toLocaleString()}</p>
 			  </div>
 			  <div class="info__box">
 				 <p class="info-item">
-					<b class="material-symbols-outlined">Downloads</b>
+					<b>Downloads</b>
 				 </p>
 				 <p class="info-counter">${hit.downloads.toLocaleString()}</p>
 			  </div>
@@ -139,3 +141,13 @@ function renderGallery(name) {
 	},
 	true
  );
+
+function onCloseBtn(e){
+	e.preventDefault();
+	loadBtn.style.display = 'none';
+	gallery.innerHTML = '';
+
+}
+
+
+ closeBtn.addEventListener('click', onCloseBtn);
